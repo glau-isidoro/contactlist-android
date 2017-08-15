@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Lista de Contatos</string>
+    <string name="btn_salvar">Salvar Contato</string>
+</resources>
