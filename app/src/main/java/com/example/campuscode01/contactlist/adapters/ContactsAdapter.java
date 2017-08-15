@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.campuscode01.contactlist.R;
+import com.example.campuscode01.contactlist.models.Contact;
 
 import org.w3c.dom.Text;
 
@@ -15,10 +16,10 @@ import java.util.List;
 
 public class ContactsAdapter extends BaseAdapter {
 
-    private List<String> contacts;
+    private List<Contact> contacts;
     private Context context;
 
-    public ContactsAdapter(Context context, List<String> contacts) {
+    public ContactsAdapter(Context context, List<Contact> contacts) {
         this.context = context;
         this.contacts = contacts;
     }
@@ -48,8 +49,8 @@ public class ContactsAdapter extends BaseAdapter {
         TextView name = (TextView) viewHolder.findViewById(R.id.tv_contact_item_name);
         TextView phone = (TextView) viewHolder.findViewById(R.id.tv_contact_item_phone);
 
-        name.setText(contacts.get(i));
-        //phone.setText(contacts.get(i));
+        name.setText(contacts.get(i).getName());
+        phone.setText(contacts.get(i).getPhone());
 
         return viewHolder;
     }

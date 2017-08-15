@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.campuscode01.contactlist.adapters.ContactsAdapter;
+import com.example.campuscode01.contactlist.models.Contact;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ListView contacts;
-    private List<String> model;
+    private List<Contact> model;
     private FloatingActionButton addButton;
 
     @Override
@@ -28,9 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         contacts = (ListView) findViewById(R.id.lv_contacts);
 
         model = new ArrayList<>();
-        model.add("Joaquim");
-        model.add("Carmen");
-        model.add("Carlos");
 
         //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, model);
         ContactsAdapter adapter = new ContactsAdapter(this, model);
@@ -56,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         Bundle bundle = data.getBundleExtra("data");
         Toast.makeText(this, "EITA", Toast.LENGTH_SHORT).show();
-        model.add(bundle.get("nome").toString());
-        model.add(bundle.get("telefone").toString());
+        Contact contact = new Contact(bundle.get("nome").toString(), bundle.get("telefone").toString());
+        model.add(contact);
 
     }
 }
