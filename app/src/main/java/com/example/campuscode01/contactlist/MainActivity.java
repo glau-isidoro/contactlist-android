@@ -1,6 +1,8 @@
 package com.example.campuscode01.contactlist;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.campuscode01.contactlist.adapters.ContactsAdapter;
 import com.example.campuscode01.contactlist.models.Contact;
+import com.example.campuscode01.contactlist.provider.ContactModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,4 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         model.add(contact);
 
     }
+
+
 }
