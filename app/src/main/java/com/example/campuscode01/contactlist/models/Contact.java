@@ -1,15 +1,13 @@
 package com.example.campuscode01.contactlist.models;
 
-/**
- * Created by campuscode01 on 8/15/17.
- */
-
 public class Contact {
 
+    private Long id;
     private String name;
     private String phone;
 
-    public Contact(String name, String phone) {
+    public Contact(Long id, String name, String phone) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
     }
@@ -29,4 +27,8 @@ public class Contact {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 }

@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class ContactsProvider extends ContentProvider {
@@ -98,9 +99,26 @@ public class ContactsProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int delete(Uri uri, String where, String[] whereArgs) {
+        SQLiteDatabase db = mDBHelper.getWritableDatabase();
+
+        int count;
+        String id;
+
+        switch (sUriMatcher.match(uri)) {
+            case URI_CONTACT_ID:
+                id = uri.getLastPathSegment();
+                count = db.delete(ContactModel.TABLE_NAME, ContactModel._ID + "=" + id + (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""), whereArgs);
+                break;
+            case URI_CONTACT:
+                count = db.delete(ContactModel.TABLE_NAME, null, null);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown or not supported URI: " + uri);
+        }
+        return count;
     }
+
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {

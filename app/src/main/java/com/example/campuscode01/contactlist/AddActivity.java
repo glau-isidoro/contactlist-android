@@ -30,14 +30,14 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
-        Bundle data = new Bundle();
+//        Intent intent = new Intent();
+//        Bundle data = new Bundle();
         nome = (EditText) findViewById(R.id.et_name);
         phone = (EditText) findViewById(R.id.et_phone);
-        data.putString("nome", nome.getText().toString());
-        data.putString("telefone", phone.getText().toString());
-        intent.putExtra("data", data);
-        setResult(200, intent);
+//        data.putString("nome", nome.getText().toString());
+//        data.putString("telefone", phone.getText().toString());
+//        intent.putExtra("data", data);
+//        setResult(200, intent);
 
         ContentValues content = new ContentValues();
         content.put(ContactModel.NAME, nome.getText().toString());

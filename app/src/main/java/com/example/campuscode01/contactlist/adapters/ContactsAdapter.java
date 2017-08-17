@@ -1,14 +1,19 @@
 package com.example.campuscode01.contactlist.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.campuscode01.contactlist.MainActivity;
 import com.example.campuscode01.contactlist.R;
 import com.example.campuscode01.contactlist.models.Contact;
+import com.example.campuscode01.contactlist.provider.ContactModel;
 
 import org.w3c.dom.Text;
 
@@ -40,7 +45,7 @@ public class ContactsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         View viewHolder = view;
         if(viewHolder == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -48,10 +53,24 @@ public class ContactsAdapter extends BaseAdapter {
         }
         TextView name = (TextView) viewHolder.findViewById(R.id.tv_contact_item_name);
         TextView phone = (TextView) viewHolder.findViewById(R.id.tv_contact_item_phone);
+        ImageButton delBtn = (ImageButton) viewHolder.findViewById(R.id.btn_delete);
 
         name.setText(contacts.get(i).getName());
         phone.setText(contacts.get(i).getPhone());
+        delBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(view.getContext(), contacts.get(i).getId().toString(), Toast.LENGTH_SHORT).show();
+                context.getContentResolver().delete(Uri.withAppendedPath(ContactModel.CONTENT_URI, contacts.get(i).getId().toString()), null, null);
+
+                contacts.remove(i);
+
+                notifyDataSetChanged();
+
+            }
+        });
 
         return viewHolder;
     }
+
 }
