@@ -17,11 +17,12 @@ import android.widget.Toast;
 import com.example.campuscode01.contactlist.adapters.ContactsAdapter;
 import com.example.campuscode01.contactlist.models.Contact;
 import com.example.campuscode01.contactlist.provider.ContactModel;
+import com.example.campuscode01.contactlist.tasks.GetContactsTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, GetContactsTask.OnSyncFinished {
 
     private ListView contacts;
     private List<Contact> model;
@@ -68,7 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        refreshList();
+
+        GetContactsTask getContacts = new GetContactsTask(this);
+        getContacts.execute();
+
+     //   refreshList();
     }
 
     private void refreshList() {
@@ -89,4 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void finishedSync(List<Contact> contactsList) {
+
+
+
+    }
 }

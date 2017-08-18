@@ -1,9 +1,15 @@
 package com.example.campuscode01.contactlist.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Contact {
 
     private Long id;
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("phone")
     private String phone;
 
     public Contact(Long id, String name, String phone) {
